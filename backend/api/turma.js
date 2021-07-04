@@ -62,7 +62,7 @@ module.exports = app =>{
         app.db('turmas')//acessando a tabela turmas
             .select('turmas.id', 'turmas.nome', 'turno', 'sala', {Representante: 'usuarios.nome'})//select na tabela
             .join('usuarios', 'usuarios.id', '=', 'turmas.representante')//fazendo join na tabela usuarios
-            .where({id: req.params.id}).first()//condição de acordo com o parametro passado na requisição
+            .where({'turmas.id': req.params.id}).first()//condição de acordo com o parametro passado na requisição
             .then(turma => res.json(turma))//armazenando em um json o resultado da busca
             .catch(err => res.status(500).send(err))//caso haja erro
     }

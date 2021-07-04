@@ -69,6 +69,19 @@
           </b-form-checkbox>
         </b-row>
         <b-row>
+          <b-col md="1" sm="3">
+            <b-form-group label="Status:" label-for="user-status">
+              <b-form-input
+                id="user-status"
+                type="text"
+                v-model="user.status"
+                :readonly="mode==='remove'"
+                placeholder="0"
+              />
+            </b-form-group>
+          </b-col>
+        </b-row>
+        <b-row>
           <b-col md="6" sm="12">
             <b-form-group label="Contato:" label-for="user-contact">
               <b-form-input

@@ -52,7 +52,7 @@ module.exports = app => {
     const get = (req, res) => {//método para buscar todos os notificacoes
         
         app.db('notificacoes')//acessando a tabela notificacoes
-            .select('notificacoes.assunto', 'notificacoes.id', {Remetente: 'usuarios.nome'}, {Turma: 'turmas.nome'}, 'createdAt')
+            .select('notificacoes.assunto', 'notificacoes.id', {Remetente: 'usuarios.nome'}, {Turma: 'turmas.nome'}, 'createdAt', 'notificacoes.conteudo')
             .count({Encaminhada: 'turmas.nome'})
             .join('turmas', 'turmas.id', '=', 'notificacoes.turmas')//join na tabela turmas
             .join('usuarios', 'usuarios.id', '=', 'notificacoes.remetente')//join na tabela usuarios

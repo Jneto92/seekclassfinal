@@ -1,10 +1,13 @@
 // Update with your config settings.
+
 module.exports = {
-    client: 'mysql2',//pluing do sgbd
-    connection: {//conexão
-      database: 'seekclass',//base de dados
-      user:     'root',//usuário
-      password: '123456'//senha
+
+  
+    client: 'mysql2',
+    connection: {
+      database: 'seekclass',
+      user:     'root',
+      password: '123456'
     },
     pool: {
       min: 2,
@@ -12,8 +15,7 @@ module.exports = {
     },
     migrations: {
       tableName: 'knex_migrations'
-      //directory: '${__dirname}/src/database/migrations'
     }
-
+  
 
 };

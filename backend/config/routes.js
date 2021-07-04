@@ -6,6 +6,16 @@ module.exports = app => {
     app.post('/signup', app.api.user.save)
     app.post('/signin', app.api.auth.signin)
     app.post('/validateToken', app.api.auth.validateToken)
+    app.get('/horarios/tsiv1', app.api.tsiv1.get)
+    app.get('/horarios/tsin1', app.api.tsin1.get)
+    app.get('/horarios/tsiv2', app.api.tsiv2.get)
+    app.get('/horarios/tsin2', app.api.tsin2.get)
+    app.get('/horarios/tsiv3', app.api.tsiv3.get)
+    app.get('/horarios/tsin3', app.api.tsin3.get)
+    app.get('/horarios/tsiv4', app.api.tsiv4.get)
+    app.get('/horarios/tsin4', app.api.tsin4.get)
+    app.get('/horarios/tsiv5', app.api.tsiv5.get)
+    app.get('/horarios/tsin5', app.api.tsin5.get)
     //rotas que precisam de alguma permissão
     app.route('/first')
         .put(app.api.user.primeiroAcesso)
@@ -33,7 +43,7 @@ module.exports = app => {
 
     app.route('/usuarios/:id')
         .all(app.config.passport.authenticate())
-        .put(admin(app.api.user.save))
+        .put(app.api.user.save)
         .get(app.api.user.getById)
         .delete(admin(app.api.user.remove))
     

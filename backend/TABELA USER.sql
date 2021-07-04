@@ -186,3 +186,13 @@ INSERT INTO MATERIAS(NOME, PROFESSOR, TURNO, SEMESTRE) VALUES
 
 SELECT email, senha FROM usuarios
 WHERE email='jose.nascimento@estudante.ifb.edu.br' AND senha='040510';
+
+insert into usuarios(nome, email, admin, tipoUsuario, representante)values(
+    "Admin", "netolima1992@gmail.com", 1,1,1
+);
+
+insert into tsin1(horario, segunda, terca, quarta, quinta, sexta)VALUES
+ ("14h-15h","Introdução a computação", "Lógica de programação", "Lógica de programação", "Rede de computadores", "Construção de páginas para internet"),
+ ("15h-16h","Introdução a computação", "Lógica de programação", "Lógica de programação", "Rede de computadores", "Construção de páginas para internet"),
+ ("16h20-17h20","Introdução a computação", "Lógica de programação", "Metodologia científica", "Rede de computadores", "Construção de páginas para internet"),
+ ("17h20-18h20","Introdução a computação", "Lógica de programação", "Metodologia científica", "Rede de computadores", "Construção de páginas para internet");

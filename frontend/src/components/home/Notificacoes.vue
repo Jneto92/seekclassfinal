@@ -24,6 +24,8 @@
       <b-card border-variant="success" bg-variant="light" text-variant="black">
         <p><b>Assunto: </b>{{ notificacoes[index].assunto }}</p>
         <p><b>Remetente: </b>{{ notificacoes[index].Remetente }}</p>
+        <p><b>Criado em: </b>{{ notificacoes[index].createdAt }}</p>
+        <p><b>Conteúdo: </b>{{ notificacoes[index].conteudo }}</p>
       </b-card>
     </p>
   </div>

@@ -14,8 +14,8 @@ comentar o código;
 
 
 caminho para o banco de dados mysql
-C:\ProgramData\MySQL\MySQL Server 8.0\Data\sistemaseekclass
-
+C:\ProgramData\MySQL\MySQL Server 8.0\Data\seekclass
+INSERT INTO seekclass.disciplinas SELECT * from seekclass2.disciplinas
 mysql -h localhost -u root -p
 show databases;
 use sistemaseekclass;
@@ -43,6 +43,10 @@ create table gradePessoal
 8- fazer push de notificações para email(pré-requisito: 4)
 9- criar página de exibição de avisos no frontend(pré-requisito: 4)
 10- fazer a página de recuperação de senha
+11- arrumar o titulo na página de LOGIN
+12- arrumar o loading quando aperta f5 para evitar perda de dados redenrizados nos select
+
+
 
 
 

@@ -4,7 +4,7 @@
     <b-card class="mt-3 mb-3">
       <b-form>
         <b-row>
-          <b-form-group
+          <b-form-group hidden
             label="Escolha um remetente: "
             label-for="notificacao-remetente"
           >

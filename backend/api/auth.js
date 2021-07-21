@@ -26,7 +26,7 @@ module.exports = app => {
             .where({ email: user.email })
             .first()//pegando apenas o primeiro dado registrado
 
-
+        if(userDb.status===0) return res.status(400).send('Senha ainda não definida.')
             
         if (!userDb) return res.status(400).send('Dados incorretos')//se o email não existir no banco, resposta de erro
         const isMatch = bcrypt.compareSync(user.senha, userDb.senha)//comparando a senha criptografada com a senha do banco de dados
@@ -41,6 +41,7 @@ module.exports = app => {
             admin: userDb.admin,
             representante: userDb.representante,
             tipoUsuario: userDb.tipoUsuario,
+            senha: userDb.senha,
             iat: now,//emissão de data de login e emissão do token
             exp: now + (60 * 60 * 24 * 3)//expiração do login designado para 3 dias
 

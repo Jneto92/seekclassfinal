@@ -14,10 +14,13 @@ import Disciplinas from '../components/home/Disciplinas'
 import Professor from '../components/home/ProfessorId'
 import Auth from '../components/auth/Auth'
 import Horarios from '../components/home/Horarios'
+import AdminGrades from '../components/admin/HorariosAdmin'
+import EsqueceuSenha from '../components/home/EsqueceuSenha'
 
 Vue.use(VueRouter)
 
-const routes = [{
+const routes = [
+{
     name: 'home',
     path: '/',
     component: Home
@@ -69,6 +72,14 @@ const routes = [{
     name:'horarios',
     path: '/horarios',
     component: Horarios
+},{
+    name: 'adminhorarios',
+    path: '/adminhorarios',
+    component: AdminGrades
+},{
+    name: 'esqueceusenha',
+    path: '/esqueceusenha',
+    component: EsqueceuSenha
 }]
 
 export default  new VueRouter({

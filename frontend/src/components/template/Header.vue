@@ -4,7 +4,8 @@
       <i class="fa fa-lg" :class="icon"></i>
     </a>
     <h1 class="title">
-      <router-link to="/">{{ title }}</router-link>
+      <router-link to="/" v-if="!hideNotification">{{ title }}</router-link>
+      <h1 v-else>{{ title }}</h1>
     </h1>
     <NotificationDropdown v-if="!hideNotification"/>
     <UserDropdown v-if="!hideUserDropdown" />

@@ -32,8 +32,8 @@ module.exports = app => {
         } catch (msg) {
             return res.status(400).send(msg)//erro
         }
-        user.senha = encryptPassword(user.senha)//criptografando a senha digitada
-        delete user.confirmarSenha//deletando a confirmação de senha digitada 
+        //user.senha = encryptPassword(user.senha)//criptografando a senha digitada
+        //delete user.confirmarSenha//deletando a confirmação de senha digitada 
 
         if (user.id) {//verifica se id foi passado como parametro se sim faz um update no bd
             app.db('usuarios')//acessa a tabela usuarios no bd
@@ -157,8 +157,9 @@ module.exports = app => {
                 //console.log(userFromDb)
 
             existsOrError(userFromDb, 'Usuário não existe')//erro
+            
             //statusFirst(userFromDb.status, 'Senha já definida para o usuário'+user.email)//verificando se o email ainda não fez o primeiro acesso
-                
+            
                 //userFromDb.status = 1//setando o status=1 para não permitir um novo primeiro acesso
                 userFromDb.senha = user.senha//setando a senha para salvar no banco
                 userFromDb.senha = encryptPassword(userFromDb.senha)//criptografando a senha digitada

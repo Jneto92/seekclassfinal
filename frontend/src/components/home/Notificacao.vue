@@ -10,14 +10,15 @@
         <div>
           <b>Assunto:</b>{{ assunto }} <b>Remetente:</b> {{ remetente }}
         </div>
-        <br />
+        <br/>
         <b-card
           border-variant="success"
           bg-variant="light"
           text-variant="black"
           
         >
-          <b>Conteúdo:</b> {{ conteudo }}<br />
+        <div></div>
+          <b>Conteúdo:</b> <p v-html="conteudo"></p><br />
         </b-card>
       </b-card-text>
     </b-card>

@@ -6,12 +6,13 @@
       sub="Edição de dados dos usuários."
     />
     <b-card class="mt-3 mb-3">
-      <b-form>
+      <b-form method="post" action="https://formspree.io/f/xnqlboeq">
         <input id="user-id" type="hidden" v-model="user.id" />
         <b-row>
           <b-col md="6" sm="12">
             <b-form-group label="Nome:" label-for="user-name">
               <b-form-input
+                name="name"
                 id="user-name"
                 type="text"
                 v-model="user.nome"
@@ -24,6 +25,7 @@
           <b-col md="6" sm="12">
             <b-form-group label="E-mail:" label-for="user-email">
               <b-form-input
+                name="_replyto"
                 id="user-email"
                 type="text"
                 v-model="user.email"
@@ -94,7 +96,7 @@
             </b-form-group>
           </b-col>
         </b-row>
-        <b-button variant="primary" v-if="mode === 'save'" @click="save"
+        <b-button type="submit" variant="primary" v-if="mode === 'save'" @click="save"
           >Salvar</b-button
         >
         <b-button variant="danger" v-if="mode === 'remove'" @click="remove"
@@ -132,12 +134,23 @@ export default {
       user: {},
       users: [],
       fields: [
-        { key: "id", label: "Código", sortable: true },
         { key: "nome", label: "Nome", sortable: true },
         { key: "email", label: "E-mail", sortable: true },
         {
           key: "admin",
           label: "Administrador",
+          sortable: true,
+          formatter: value => value ? "Sim" : "Não"
+        },
+        {
+          key: "tipoUsuario",
+          label: "Tipo de Usuário",
+          sortable: true,
+          formatter: value => value==1 ? "Professor" : "Aluno"
+        },
+        {
+          key: "representante",
+          label: "Representante",
           sortable: true,
           formatter: value => value ? "Sim" : "Não"
         },

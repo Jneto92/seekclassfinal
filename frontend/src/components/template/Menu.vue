@@ -8,26 +8,28 @@
         <router-link to="/professores" class="navbar-item">Professores</router-link> 
         <router-link class="navbar-item" to="/avisos" v-show="user.admin==1 || user.representante==1
           || user.tipoUsuario==1">Avisos</router-link>
-      </div>
+      
     
     
     <div class="navbar-item has-dropdown is-hoverable" id="navbar">
-      <div id="navbar">
+      
         <a class="navbar-link" v-show="user.admin==1"> Administração <i class="fa fa-lg"></i></a>
         <div class="navbar-dropdown" id="itensMenu">
-          <a class="navbar-item">
-            <router-link to="/usuarioadmin" >Usuários</router-link>
-            <router-link to="/turmaadmin">Turmas</router-link>
-            <router-link to="/disciplinasadmin">Disciplinas</router-link>
-          </a>
+          
+            <router-link class="navbar-item" to="/usuarioadmin" >Usuários</router-link>
+            <router-link class="navbar-item" to="/turmaadmin">Turmas</router-link>
+            <router-link class="navbar-item" to="/disciplinasadmin">Disciplinas</router-link>
+            <router-link class="navbar-item" to="/adminhorarios">Grade horária</router-link>
+          
         </div>
-      </div>
+      
     </div>
     <div class="navbar-item has-dropdown is-hoverable" id="navbar">
       <div id="navbar">
         <hr class="navbar-divider" />
-        <div class="versao" id="versao">Version 1.8.1</div>
+        <div class="versao" id="versao">Version 2.0.1</div>
       </div>
+    </div>
     </div>
   </aside>
 </template>
@@ -48,7 +50,7 @@ export default {
   flex-wrap: wrap;
   width: 300px;
   background-color: azure;
-  text-decoration: none;
+  
 }
 .menu {
   grid-area: menu;
@@ -64,7 +66,11 @@ export default {
   display: block;
 }
 #navbar a:hover {
-  text-decoration: none;
+  background-color: #963e6a;
+  color:azure
+}
+#navbar a:active{
+  background-color: #4a102d;
 }
 
 Aside.menu > button#butao {
@@ -72,6 +78,7 @@ Aside.menu > button#butao {
   width: 100px;
   height: 5%;
   margin-left: 190px;
+
 }
 Aside.menu > button#butao:hover {
   background-color: rgb(62, 151, 62);

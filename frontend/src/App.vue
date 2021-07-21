@@ -2,7 +2,8 @@
   <div id="app" :class="{'hide-menu': !isMenuVisible || !user}">
     <Header title="SeekClass" :hideToggle="!user" :hideUserDropdown="!user" :hideNotification="!user"/>
     <Menu v-if="user"/>
-    <Content />
+    <Loading v-if="validatingToken" />
+    <Content v-else />
     <Footer />
   </div>
 </template>
@@ -15,6 +16,7 @@ import Header from "./components/template/Header";
 import Menu from "./components/template/Menu";
 import Footer from "./components/template/Footer";
 import Content from "./components/template/Content";
+import Loading from "./components/template/Loading";
 //import Login from "./components/Login";
 //import axios from 'axios';
 //import func from 'vue-editor-bridge';
@@ -26,6 +28,7 @@ export default {
     Menu,
     Content,
     Footer,
+    Loading,
   },
   computed: mapState(['isMenuVisible', 'user']),
   data: function(){

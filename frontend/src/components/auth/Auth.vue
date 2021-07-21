@@ -1,25 +1,53 @@
 <template>
   <div class="auth-content">
+    
     <div class="auth-modal">
-      <h1 class="title">SeekClass</h1>
-      <hr />
+      
+      <hr/>
       <div class="auth-title">
-        {{ showSignup ? "Primeiro Acesso" : "Login" }}
+        {{ showSignup ? "Primeiro Acesso" : "Área de acesso ao sistema" }}
       </div>
-      <input v-model="user.email" name="email" type="text" placeholder="E-mail" />
+      <p class="control has-icons-left has-icons-right">
+        <input
+          class="input is-primary"
+          v-model="user.email"
+          name="email"
+          type="text"
+          placeholder="E-mail"
+          v-on:keyup.enter="enter"
+          autofocus
+        />
+        <span class="icon is-small is-left">
+          <i class="fa fa-envelope"></i>
+        </span>
+      </p>
+      <p class="control has-icons-left has-icons-right">
       <input
+        class="input is-primary"
         v-model="user.senha"
         type="password"
         placeholder="Digite a senha"
+        v-on:keyup.enter="enter"
       />
+      <span class="icon is-small is-left">
+          <i class="fa fa-lock"></i>
+      </span>
+      </p>
+      <p class="control has-icons-left has-icons-right">
       <input
+        class="input is-primary"
         v-if="showSignup"
         v-model="user.confirmarSenha"
         type="password"
         placeholder="Confirme a senha"
+        v-on:keyup.enter="enter"
       />
-      <button v-if="showSignup" @click="primeiroAcesso">Registrar</button>
-      <button v-else @click="signin">Entrar</button>
+      <span class="icon is-small is-left" v-if="showSignup">
+          <i class="fa fa-lock"></i>
+      </span>
+      </p>
+      <button id="ButtonSignup" class="button is-success" v-if="showSignup" @click="primeiroAcesso">Registrar</button>
+      <button id="ButtonSignin" class="button is-success" v-else @click="signin">Entrar</button>
 
       <a href @click.prevent="showSignup = !showSignup">
         <span v-if="showSignup"
@@ -27,6 +55,9 @@
         >
         <span v-else>Primeiro Acesso?</span>
       </a>
+      <router-link to="/esqueceusenha" v-show="!showSignup"> 
+        <span>Esqueceu a senha?</span>
+      </router-link>
     </div>
   </div>
 </template>
@@ -64,6 +95,14 @@ export default {
         })
         .catch(showError);
     },
+    enter(){
+      if(this.showSignup){
+        this.primeiroAcesso()
+      }else{
+        this.signin()
+      }
+      
+    }
   },
 };
 </script>
@@ -111,13 +150,21 @@ export default {
   color: white;
   padding: 5px 15px;
 }
-.auth-modal hr{
-	border: 1;
-	width: 100%;
-	height: 1px;
-	background-image: linear-gradient(to right, 
-	rgba(120, 120, 120, 0),
-	rgba(120, 120, 120, 0.75),
-	rgba(120, 120, 120, 0));
+.auth-modal hr {
+  border: 1;
+  width: 100%;
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    rgba(120, 120, 120, 0),
+    rgba(120, 120, 120, 0.75),
+    rgba(120, 120, 120, 0)
+  );
+}
+#ButtonSignin{
+  width: 100%;
+}
+#ButtonSignup{
+  width: 100%;
 }
 </style>

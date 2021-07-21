@@ -192,7 +192,64 @@ insert into usuarios(nome, email, admin, tipoUsuario, representante)values(
 );
 
 insert into tsin1(horario, segunda, terca, quarta, quinta, sexta)VALUES
- ("14h-15h","Introdução a computação", "Lógica de programação", "Lógica de programação", "Rede de computadores", "Construção de páginas para internet"),
- ("15h-16h","Introdução a computação", "Lógica de programação", "Lógica de programação", "Rede de computadores", "Construção de páginas para internet"),
- ("16h20-17h20","Introdução a computação", "Lógica de programação", "Metodologia científica", "Rede de computadores", "Construção de páginas para internet"),
- ("17h20-18h20","Introdução a computação", "Lógica de programação", "Metodologia científica", "Rede de computadores", "Construção de páginas para internet");
+ ("19h-19h50","Lógica de programação", "Construção de páginas para internet", "Rede de computadores", "Metodologia científica", "Introdução a computação"),
+ ("19h50-20h40","Lógica de programação", "Construção de páginas para internet", "Rede de computadores", "Metodologia científica", "Introdução a computação"),
+ ("21h-21h50","Lógica de programação", "Construção de páginas para internet", "Rede de computadores", "Lógica de programação", "Introdução a computação"),
+ ("21h50-22h40","Lógica de programação", "Construção de páginas para internet", "Rede de computadores", "Lógica de programação", "Introdução a computação");
+
+ insert into tsiv1(horario, segunda, terca, quarta, quinta, sexta)VALUES
+ ("14h-15h","Rede de computadores", "Construção de páginas para internet", "Metodologia científica", "Lógica de programação", "Introdução a computação"),
+ ("15h-16h","Rede de computadores", "Construção de páginas para internet", "Metodologia científica", "Lógica de programação", "Introdução a computação"),
+ ("16h20-17h20","Rede de computadores", "Construção de páginas para internet", "Lógica de programação", "Lógica de programação", "Introdução a computação"),
+ ("17h20-18h20","Rede de computadores", "Construção de páginas para internet", "Lógica de programação", "Lógica de programação", "Introdução a computação");
+
+ insert into tsiv2(horario, segunda, terca, quarta, quinta, sexta)VALUES
+ ("14h-15h","Lógica de Programação II", "Construção de páginas para internet II", "Engenharia de Software", "Sistema Operacional", "Gestão de TI"),
+ ("15h-16h","Lógica de Programação II", "Construção de páginas para internet II", "Engenharia de Software", "Sistema Operacional", "Gestão de TI"),
+ ("16h20-17h20","Lógica de Programação II", "Construção de páginas para internet II", "Engenharia de Software", "Sistema Operacional", "Gestão de TI"),
+ ("17h20-18h20","Lógica de Programação II", "Construção de páginas para internet II", "Engenharia de Software", "Sistema Operacional", "Gestão de TI");
+
+ insert into TSIN2(horario, segunda, terca, quarta, quinta, sexta)VALUES
+ ("19h-19h50","Sistema Operacional", "Lógica de Programação II", "Construção de páginas para internet II", "Gestão de TI", "Engenharia de Software"),
+ ("19h50-20h40","Sistema Operacional", "Lógica de Programação II", "Construção de páginas para internet II", "Gestão de TI", "Engenharia de Software"),
+ ("21h-21h50","Sistema Operacional", "Lógica de Programação II", "Construção de páginas para internet II", "Gestão de TI", "Engenharia de Software"),
+ ("21h50-22h40","Sistema Operacional", "Lógica de Programação II", "Construção de páginas para internet II", "Gestão de TI", "Engenharia de Software");
+
+ insert into TSIV3(horario, segunda, terca, quarta, quinta, sexta)VALUES
+ ("14h-15h","Análise e Projetos de Sistemas para Internet", "Programação Orientada a Objetos", "Banco de dados", "Administração de serviços para internet", "Multimídia para internet"),
+ ("15h-16h","Análise e Projetos de Sistemas para Internet", "Programação Orientada a Objetos", "Banco de dados", "Administração de serviços para internet", "Multimídia para internet"),
+ ("16h20-17h20","Análise e Projetos de Sistemas para Internet", "Programação Orientada a Objetos", "Banco de dados", "Administração de serviços para internet", "Multimídia para internet"),
+ ("17h20-18h20","Análise e Projetos de Sistemas para Internet", "Programação Orientada a Objetos", "Banco de dados", "Administração de serviços para internet", "Multimídia para internet");
+
+ insert into TSIN3(horario, segunda, terca, quarta, quinta, sexta)VALUES
+ ("19h-19h50","Multimídia para internet", "Programação Orientada a Objetos", "Análise e Projetos de Sistemas para Internet", "Administração de serviços para internet", "Banco de dados"),
+ ("19h50-20h40","Multimídia para internet", "Programação Orientada a Objetos", "Análise e Projetos de Sistemas para Internet", "Administração de serviços para internet", "Banco de dados"),
+ ("21h-21h50","Multimídia para internet", "Programação Orientada a Objetos", "Análise e Projetos de Sistemas para Internet", "Administração de serviços para internet", "Banco de dados"),
+ ("21h50-22h40","Multimídia para internet", "Programação Orientada a Objetos", "Análise e Projetos de Sistemas para Internet", "Administração de serviços para internet", "Banco de dados");
+
+ insert into TSIV4(horario, segunda, terca, quarta, quinta, sexta)VALUES
+ ("14h-15h","Projeto de Trabalho de Conclusão de Curso", "Programação para Internet I", "Segurança e Auditoria de Sistemas", "Banco de Dados II", "Optativa I"),
+ ("15h-16h","Projeto de Trabalho de Conclusão de Curso", "Programação para Internet I", "Segurança e Auditoria de Sistemas", "Banco de Dados II", "Optativa I"),
+ ("16h20-17h20","Empreendedorismo", "Programação para Internet I", "Segurança e Auditoria de Sistemas", "Banco de Dados II", "Optativa I"),
+ ("17h20-18h20","Empreendedorismo", "Programação para Internet I", "Segurança e Auditoria de Sistemas", "Banco de Dados II", "Optativa I");
+
+ insert into TSIN4(horario, segunda, terca, quarta, quinta, sexta)VALUES
+ ("19h-19h50","Programação para Internet I", "Projeto de Trabalho de Conclusão de Curso", "Banco de Dados II", "Optativa I", "Segurança e Auditoria de Sistemas"),
+ ("19h50-20h40","Programação para Internet I", "Projeto de Trabalho de Conclusão de Curso", "Banco de Dados II", "Optativa I", "Segurança e Auditoria de Sistemas"),
+ ("21h-21h50","Programação para Internet I", "Empreendedorismo", "Banco de Dados II", "Optativa I", "Segurança e Auditoria de Sistemas"),
+ ("21h50-22h40","Programação para Internet I", "Empreendedorismo", "Banco de Dados II", "Optativa I", "Segurança e Auditoria de Sistemas");
+
+insert into TSIV5(horario, segunda, terca, quarta, quinta, sexta)VALUES
+ ("14h-15h","Optativa II", "Programação para Internet II", "Comércio Eletrônico", "Ética", "Estatistica"),
+ ("15h-16h","Optativa II", "Programação para Internet II", "Comércio Eletrônico", "Ética", "Estatistica"),
+ ("16h20-17h20","Optativa II", "Programação para Internet II", "Comércio Eletrônico", "Trabalho de Conclusão de Curso", "Estatistica"),
+ ("17h20-18h20","Optativa II", "Programação para Internet II", "Comércio Eletrônico", "Trabalho de Conclusão de Curso", "Estatistica");
+
+ insert into TSIN5(horario, segunda, terca, quarta, quinta, sexta)VALUES
+ ("19h-19h50","Comércio Eletrônico", "Estatistica", "Optativa II", "Trabalho de Conclusão de Curso", "Programação para Internet II"),
+ ("19h50-20h40","Comércio Eletrônico", "Estatistica", "Optativa II", "Trabalho de Conclusão de Curso", "Programação para Internet II"),
+ ("21h-21h50","Comércio Eletrônico", "Estatistica", "Optativa II", "Ética", "Programação para Internet II"),
+ ("21h50-22h40","Comércio Eletrônico", "Estatistica", "Optativa II", "Ética", "Programação para Internet II");
+
+
+update usuarios set status=0 where id=1;

@@ -8,6 +8,7 @@ module.exports = app => {
     app.post('/validateToken', app.api.auth.validateToken)
     app.get('/horarios/tsiv1', app.api.tsiv1.get)
     app.get('/horarios/tsin1', app.api.tsin1.get)
+    app.put('/horarios/tsin1/edit', app.api.tsin1.save)
     app.get('/horarios/tsiv2', app.api.tsiv2.get)
     app.get('/horarios/tsin2', app.api.tsin2.get)
     app.get('/horarios/tsiv3', app.api.tsiv3.get)

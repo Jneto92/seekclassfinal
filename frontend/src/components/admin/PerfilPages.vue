@@ -11,7 +11,7 @@
           <b-tab title="Trocar senha"
             ><b-card-text><TrocarSenha /></b-card-text></b-tab
           >
-          <b-tab title="Tab 3"><b-card-text>Tab contents 3</b-card-text></b-tab>
+          <!--<b-tab title="Tab 3"><b-card-text>Tab contents 3</b-card-text></b-tab>--->
         </b-tabs>
       </b-card>
     </div>
@@ -40,7 +40,7 @@ export default {
   methods: {
     getStats() {
       axios
-        .get(`${baseApiUrl}/perfis/`)
+        .get(`${baseApiUrl}/usuarios/`)
         .then((res) => (this.perfil = res.data));
     },
   },

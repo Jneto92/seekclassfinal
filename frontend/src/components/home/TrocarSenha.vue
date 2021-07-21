@@ -35,7 +35,7 @@ import {mapState} from 'vuex'
 import axios from "axios";
 import { baseApiUrl, showError } from "@/global";
 export default {
-    name: "Perfil",
+    name: "TrocarSenha",
     data: function () {
         return {
         usuario: {},

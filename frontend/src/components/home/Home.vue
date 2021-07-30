@@ -1,8 +1,10 @@
 <template>
     <div class="home">
         <div>
-            <PageTitle icon="fa fa-home" main="Início" sub="SeekClass" />
+            <PageTitle icon="fa fa-home" main="Início" sub="Bem vindo" />
         </div>
+        
+            
         
     </div>
     
@@ -11,12 +13,13 @@
 <script>
 import PageTitle from '../template/PageTitle';
 
-
 export default {
+    
     name: 'Home',
     components: {
         PageTitle
-    }
+    },
+    
     
 }
 </script>

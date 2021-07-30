@@ -45,6 +45,7 @@
 </template>
 <script>
 //import Turmas from "../home/Turmas";
+import {mapState} from 'vuex'
 import axios from "axios";
 import { baseApiUrl /*showError*/ } from "@/global";
 import PageTitle from "../template/PageTitle";
@@ -69,6 +70,7 @@ export default {
       options: [{ value: null, text: "Escolha uma opção" }],
     };
   },
+  computed: mapState(['notification']),
   methods: {
     loadNotificacoesByTurmas() {
       const url = `${baseApiUrl}/notificacoes/turmas/${this.selected}`;
@@ -92,7 +94,13 @@ export default {
           if (a.createdAt > b.createdAt) return -1;
           return 0;
         });
-
+        if(res.data.length>=this.notification){
+          this.$store.commit("setNotification", res.data.length-this.notification);
+        }else{
+          this.$store.commit("setNotification", 0);
+        }
+        
+        console.log(this.notification)
         this.notificacoes = res.data;
       });
     },

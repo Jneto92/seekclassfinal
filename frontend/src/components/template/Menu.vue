@@ -3,7 +3,7 @@
     
     
       <div id="navbar">
-        <a class="navbar-item"> Mapa do IFB </a>
+        <router-link class="navbar-item" to="/mapaifb"> Mapa do IFB</router-link>
         <router-link class="navbar-item" to="/horarios"> Grade Horária</router-link>
         <router-link to="/professores" class="navbar-item">Professores</router-link> 
         <router-link class="navbar-item" to="/avisos" v-show="user.admin==1 || user.representante==1
@@ -27,7 +27,7 @@
     <div class="navbar-item has-dropdown is-hoverable" id="navbar">
       <div id="navbar">
         <hr class="navbar-divider" />
-        <div class="versao" id="versao">Version 2.0.1</div>
+        <div class="versao" id="versao">Version 3.0.0</div>
       </div>
     </div>
     </div>
@@ -66,7 +66,7 @@ export default {
   display: block;
 }
 #navbar a:hover {
-  background-color: #963e6a;
+  background-color: #833e8c;
   color:azure
 }
 #navbar a:active{

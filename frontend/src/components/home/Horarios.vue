@@ -1,6 +1,7 @@
 <template>
   <div class="horarios">
     <PageTitle icon="fa fa-table" main="Grade Horaria" sub="Horários" />
+    <b-card class="mt-3 mb-3">
     <b-form>
       <b-row>
         <b-form-group label="Escolha uma turma: " label-for="horarios-turmas">
@@ -14,7 +15,8 @@
       </b-row>
       <b-button variant="primary" @click="carregarHorarios">Buscar</b-button>
     </b-form>
-    <b-table hover striped :items="horarios" :fields="fields"> </b-table>
+    <b-table hover striped :items="horarios" :fields="fields" bordered responsive small> </b-table>
+    </b-card>
   </div>
 </template>
 
@@ -34,12 +36,12 @@ export default {
       horarios: [],
       nomeTurma: {},
       fields: [
-        { key: "horario", label: "Horário" },
-        { key: "segunda", label: "Segunda" },
-        { key: "terca", label: "Terça" },
-        { key: "quarta", label: "Quarta" },
-        { key: "quinta", label: "Quinta" },
-        { key: "sexta", label: "Sexta" },
+        { key: "horario", label: "Horário", variant: 'info' },
+        { key: "segunda", label: "Segunda", variant: 'success' },
+        { key: "terca", label: "Terça", variant: 'success' },
+        { key: "quarta", label: "Quarta", variant: 'success' },
+        { key: "quinta", label: "Quinta", variant: 'success' },
+        { key: "sexta", label: "Sexta", variant: 'success' },
       ],
     };
   },

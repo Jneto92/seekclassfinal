@@ -82,7 +82,9 @@ export default {
           this.$store.commit("setUser", res.data);
           localStorage.setItem(userKey, JSON.stringify(res.data));
           this.$router.push({ path: "/" });
+          //this.$toasted.global.defaultSuccess();
         })
+
         .catch(showError);
     },
     primeiroAcesso() {
@@ -163,8 +165,10 @@ export default {
 }
 #ButtonSignin{
   width: 100%;
+  background-color: rgb(62, 151, 62);
 }
 #ButtonSignup{
   width: 100%;
+  background-color: rgb(62, 151, 62);
 }
 </style>

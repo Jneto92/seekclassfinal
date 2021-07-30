@@ -2,15 +2,46 @@
     <div class="user-dropdown1">
       <div class="user-dropdown-img1">
         <div style="font-size: 25px">
-          <router-link to="/notificacoes"><i class="fa fa-bell" aria-hidden="false"></i></router-link>
+          <router-link to="/notificacoes">
+            <i class="fa fa-bell" aria-hidden="false">
+              <b-badge class="badge" variant="light">{{notification}}</b-badge>
+            </i></router-link>
         </div>
       </div>
     </div>
 </template>
 
 <script>
+import {mapState} from 'vuex'
+import axios from "axios";
+import { baseApiUrl /*showError*/ } from "@/global";
 export default {
 	name: 'NotificationDropdown',
+  data: function () {
+    return {
+      numero: null,
+    }
+  },
+  computed: mapState(['notification']),
+  methods: {
+    loadNotificacoes() {
+      const url = `${baseApiUrl}/notificacoes`;
+      axios.get(url).then((res) => {
+        res.data.sort((a, b) => {
+          if (a.createdAt < b.createdAt) return 1;
+          if (a.createdAt > b.createdAt) return -1;
+          return 0;
+        });
+        //this.$store.commit("setNotification", res.data.length);
+        
+
+      });
+    },
+  },
+  
+  mounted() {
+    this.loadNotificacoes();
+  },
 }
 </script>
 
@@ -33,5 +64,10 @@ export default {
 }
 .user-dropdown-img1 > i {
   justify-content: center;
+}
+.badge{
+  font-size: 12px;
+  width: 18px;
+  height: 3%;
 }
 </style>

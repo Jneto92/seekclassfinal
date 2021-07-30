@@ -127,12 +127,5 @@ export default {
 };
 </script>
 <style scoped>
-.entradas {
-  width: 250px;
-  margin-bottom: 5px;
-}
-.entradas1 {
-  width: 400px;
-  margin-bottom: 5px;
-}
+
 </style>

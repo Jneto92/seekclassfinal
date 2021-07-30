@@ -16,6 +16,9 @@ import Auth from '../components/auth/Auth'
 import Horarios from '../components/home/Horarios'
 import AdminGrades from '../components/admin/HorariosAdmin'
 import EsqueceuSenha from '../components/home/EsqueceuSenha'
+import Mapa from '../components/home/Mapa'
+
+import {userKey} from '@/global'
 
 Vue.use(VueRouter)
 
@@ -27,19 +30,31 @@ const routes = [
 },{
     name: 'adminpage',
     path: '/admin',
-    component: AdminPage
+    component: AdminPage,
+    meta: {
+        requiresAdmin: true
+    }
 },{
     name: 'usuarioadmin',
     path: '/usuarioadmin',
-    component: UsuarioAdmin
+    component: UsuarioAdmin,
+    meta: {
+        requiresAdmin: true
+    }
 },{
     name: 'turmaadmin',
     path: '/turmaadmin',
-    component: TurmaAdmin
+    component: TurmaAdmin,
+    meta: {
+        requiresAdmin: true
+    }
 },{
     name: 'disciplinasadmin',
     path: '/disciplinasadmin',
-    component: DisciplinaAdmin
+    component: DisciplinaAdmin,
+    meta: {
+        requiresAdmin: true
+    }
 },{
     name: 'perfilPages',
     path: '/perfil',
@@ -47,7 +62,10 @@ const routes = [
 },{
     name: 'aviso',
     path: '/avisos',
-    component: Avisos
+    component: Avisos,
+    meta: {
+        requiresPostar: true
+    }
 },{
     name: 'notif',
     path: '/notificacoes',
@@ -75,15 +93,39 @@ const routes = [
 },{
     name: 'adminhorarios',
     path: '/adminhorarios',
-    component: AdminGrades
+    component: AdminGrades,
+    meta: {
+        requiresAdmin: true
+    }
 },{
     name: 'esqueceusenha',
     path: '/esqueceusenha',
     component: EsqueceuSenha
+},{
+    name: 'mapaifb',
+    path: '/mapaifb',
+    component: Mapa
 }]
 
-export default  new VueRouter({
+const router = new VueRouter({
     mode: 'history',
     routes
 })
 
+router.beforeEach((to, from, next)=>{
+    const json = localStorage.getItem(userKey)
+    if(to.matched.some(record => record.meta.requiresAdmin)){
+        const user = JSON.parse(json)
+        user && user.admin ? next() : next({path: '/'})
+    }else{
+        next()
+    }
+    if(to.matched.some(record => record.meta.requiresPostar)){
+        const user = JSON.parse(json)
+        user && (user.representante || user.tipoUsuario===1) ? next() : next({path: '/'})
+    }else{
+        next()
+    }
+})
+ 
+export default router

@@ -8,10 +8,11 @@ module.exports = app => {
         if(req.params.id) notificacoes.id = req.params.id//verificando se a requisição contém paramentros
         console.log(notificacoes)
         try {
-            existsOrError(notificacoes.remetente, 'Aviso não informado')//verificando se o campo foi preenchido
+            //existsOrError(notificacoes.remetente, 'Aviso não informado')//verificando se o campo foi preenchido
             //existsOrError(notificacoes.turmas, 'Turmas não informadas')//verificando se o campo foi preenchido
             existsOrError(notificacoes.assunto, 'Assunto não informado')//verificando se o campo foi preenchido
             existsOrError(notificacoes.conteudo, 'Conteúdo não informado')//verificando se o campo foi preenchido
+            //console.log("aqui")
         }catch(msg) {
             return res.status(400).send(msg)//caso haja erro
         }
@@ -52,7 +53,7 @@ module.exports = app => {
     const get = (req, res) => {//método para buscar todos os notificacoes
         
         app.db('notificacoes')//acessando a tabela notificacoes
-            .select('notificacoes.assunto', 'notificacoes.id', {Remetente: 'usuarios.nome'}, {Turma: 'turmas.nome'}, 'createdAt', 'notificacoes.conteudo')
+            .select('notificacoes.assunto', 'notificacoes.id', {Remetente: 'usuarios.nome'}, {Turma: 'turmas.nome'}, 'createdAt', 'notificacoes.conteudo', 'postar')
             .count({Encaminhada: 'turmas.nome'})
             .join('turmas', 'turmas.id', '=', 'notificacoes.turmas')//join na tabela turmas
             .join('usuarios', 'usuarios.id', '=', 'notificacoes.remetente')//join na tabela usuarios
@@ -62,7 +63,7 @@ module.exports = app => {
     }
     const getById = (req, res) => {//método para buscas avisos pelo id
         app.db('notificacoes')//acessando a tabela notificacoes
-            .select('notificacoes.id', 'createdAt', 'notificacoes.assunto', {Turma: 'turmas.nome'}, {Remetente: 'usuarios.nome'})
+            .select('notificacoes.id', 'createdAt', 'notificacoes.assunto', {Turma: 'turmas.nome'}, {Remetente: 'usuarios.nome'}, 'postar')
             .join('turmas', 'turmas.id', '=', 'notificacoes.turmas')//join na tabela turmas
             .join('usuarios', 'usuarios.id', '=', 'notificacoes.remetente')//join na tabela usuarios
             .where({'notificacoes.id': req.params.id}).first()
@@ -72,7 +73,7 @@ module.exports = app => {
 
     const getTurmaId = (req, res) => {
         app.db('notificacoes')//acessando a tabela notificacoes
-            .distinct('notificacoes.id', 'notificacoes.turmas', 'notificacoes.assunto', 'notificacoes.remetente', 'createdAt', 'updatedAt', 'notificacoes.conteudo', {Turma: 'turmas.nome'}, {Remetente: 'usuarios.nome'})
+            .distinct('notificacoes.id', 'notificacoes.turmas', 'notificacoes.assunto', 'notificacoes.remetente', 'createdAt', 'updatedAt', 'notificacoes.conteudo', {Turma: 'turmas.nome'}, {Remetente: 'usuarios.nome'}, 'postar')
             .join('turmas', 'turmas.id', '=', 'notificacoes.turmas')//join na tabela turmas
             .join('usuarios', 'usuarios.id', '=', 'notificacoes.remetente')//join na tabela usuarios
             .where({'notificacoes.turmas': req.params.turmas})

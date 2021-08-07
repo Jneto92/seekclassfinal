@@ -1,8 +1,9 @@
 const bcrypt = require('bcrypt-nodejs')
+const nodemailer = require('nodemailer')
 
 module.exports = app => {
 
-    const { existsOrError, notExistsOrError, equalsOrError, statusFirst } = app.api.validation//importanto métodos para validações dos campos
+    const { existsOrError, notExistsOrError, equalsOrError, statusFirst, passRandom } = app.api.validation//importanto métodos para validações dos campos
 
     const encryptPassword = senha => {//método para criptografar senha
         const salt = bcrypt.genSaltSync(10)
@@ -123,6 +124,7 @@ module.exports = app => {
                         .then(_ => res.status(204).send())//sucesso
                         .catch(err => res.status(500).send(err))//erro
                     
+                    
                     //const dbStatus = await app.db('usuarios')
                     //notExistsOrError(userFromDb, 'Usuário já cadastrado')//usuário não existe no banco
                 
@@ -179,6 +181,53 @@ module.exports = app => {
         }
 
     }
+    const esqueceuSenha = async (req, res) => {
+        const user = { ...req.body }
 
-    return { save, get, getById, remove, getProfessores, primeiroAcesso, getRepresentantes, getPodepostar, trocarSenha }//retornando todas os métodos para usar em outras classes
+        try {
+            const userFromDb = await app.db('usuarios')//acessando a tabela usuarios e carregando na variavel userFromDb
+                .where({ email: user.email }).first()//verificando se e-mail existe no banco
+
+            existsOrError(userFromDb, 'Usuário não existe')//erro
+            statusFirst(!userFromDb.status, 'Primeiro acesso ainda não definido para o email: '+user.email)//verificando se o email ainda não fez o primeiro acesso
+
+            const senhaRandom = passRandom(10)
+            console.log(senhaRandom)
+            userFromDb.senha = senhaRandom
+            userFromDb.senha = encryptPassword(userFromDb.senha)//criptografando a senha digitada
+
+            app.db('usuarios')
+                .update(userFromDb)//atualiza a tabela usuarios
+                .where({ email: user.email })//condição de acordo com o email 
+                .then(_ => res.status(204).send())//sucesso
+                .catch(err => res.status(500).send(err))//erro
+
+
+                const transporter = nodemailer.createTransport({
+                    host: "smtp.gmail.com",
+                    port: 587,
+                    secure: true,
+                    auth: {
+                        user: "netolima1992@gmail.com",
+                        pass: "netolima10"
+                    }
+                });
+
+                transporter.sendMail({
+                    from: "netolima1992@gmail.com",
+                    to: userFromDb.email,
+                    subject: "Alteração de senha",
+                    text: "Nova senha: "+senhaRandom+" definida."
+                }).then(message =>{
+                    console.log(message)
+                }).catch(err => {
+                    console.log(err)
+                })
+
+        } catch (msg) {
+            return res.status(400).send(msg)//erro
+        }
+    }
+    return { save, get, getById, remove, getProfessores, primeiroAcesso, getRepresentantes, getPodepostar, trocarSenha,
+        esqueceuSenha }//retornando todas os métodos para usar em outras classes
 }

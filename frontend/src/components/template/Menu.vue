@@ -3,11 +3,13 @@
     
     
       <div id="navbar">
-        <router-link class="navbar-item" to="/mapaifb"> Mapa do IFB</router-link>
+        
         <router-link class="navbar-item" to="/horarios"> Grade Horária</router-link>
         <router-link to="/professores" class="navbar-item">Professores</router-link> 
-        <router-link class="navbar-item" to="/avisos" v-show="user.admin==1 || user.representante==1
-          || user.tipoUsuario==1">Avisos</router-link>
+        <router-link class="navbar-item" to="/avisos">Avisos</router-link>
+        <router-link class="navbar-item" to="/"> Mapa do IFB</router-link>
+        <router-link to="/pedidosavisos" class="navbar-item" v-show="user.admin==1 || user.representante==1
+          || user.tipoUsuario==1">Pedidos de Avisos</router-link>
       
     
     

@@ -5,6 +5,7 @@ module.exports = app => {
     //rotas q não precisam de permissões
     app.post('/signup', app.api.user.save)
     app.post('/signin', app.api.auth.signin)
+    app.put('/esqueceusenha/', app.api.user.esqueceuSenha)
     app.post('/validateToken', app.api.auth.validateToken)
     app.get('/horarios/tsiv1', app.api.tsiv1.get)
     app.get('/horarios/tsin1', app.api.tsin1.get)
@@ -67,8 +68,8 @@ module.exports = app => {
     app.route('/notificacoes/:id')
         .all(app.config.passport.authenticate())
         .get(app.api.notificacao.getById)
-        .put(admin(app.api.notificacao.save))
-        .delete(admin(app.api.notificacao.remove))
+        .put(app.api.notificacao.save)
+        .delete(app.api.notificacao.remove)
 
     app.route('/notificacoes/assunto/:assunto')
         .get(app.api.notificacao.getAssunto)

@@ -21,6 +21,15 @@ module.exports = app => {//funções para validação de formulários
     function statusFirst(value, msg){
         if(value === 1) throw msg
     }
+    function passRandom(len){
+        var passwd = ''
+        do{
+            passwd += Math.random().toString(36).substr(2)
+        }while(passwd.length < len)
+        passwd = passwd.substr(0, len)
 
-    return {existsOrError, notExistsOrError, equalsOrError, statusFirst}//retornando todas os métodos para usar em outras classes
+        return passwd
+    }
+
+    return {existsOrError, notExistsOrError, equalsOrError, statusFirst, passRandom}//retornando todas os métodos para usar em outras classes
 }

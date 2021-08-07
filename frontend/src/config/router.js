@@ -17,6 +17,7 @@ import Horarios from '../components/home/Horarios'
 import AdminGrades from '../components/admin/HorariosAdmin'
 import EsqueceuSenha from '../components/home/EsqueceuSenha'
 import Mapa from '../components/home/Mapa'
+import PedidosAvisos from '../components/home/PedidosAvisos'
 
 import {userKey} from '@/global'
 
@@ -63,9 +64,7 @@ const routes = [
     name: 'aviso',
     path: '/avisos',
     component: Avisos,
-    meta: {
-        requiresPostar: true
-    }
+    
 },{
     name: 'notif',
     path: '/notificacoes',
@@ -105,6 +104,13 @@ const routes = [
     name: 'mapaifb',
     path: '/mapaifb',
     component: Mapa
+},{
+    name: 'pedidosavisos',
+    path: '/pedidosavisos',
+    component: PedidosAvisos,
+    meta: {
+        requiresPostar: true
+    }
 }]
 
 const router = new VueRouter({

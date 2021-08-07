@@ -84,16 +84,31 @@ export default {
       var turmas = this.notificacao.turmas;
       //this.notificacao.Remetente = this.user.nome
       this.notificacao.remetente = this.user.id
-      console.log(this.notificacao);
-      for (var i of turmas) {
-        console.log(i);
+      console.log(this.user.representante);
+      if(this.user.representante == 1 || this.user.tipoUsuario == 1 || this.user.admin == 1){
+        console.log("Pode postar sem verificação");
+        for (var i of turmas) {
+        //console.log(i);
+        this.notificacao.postar = true;
         this.notificacao.turmas = [i];
         axios
           .post(`${baseApiUrl}/notificacoes`, this.notificacao)
           .then(() => {})
           .catch(showError);
+        }
+        this.$toasted.global.defaultSuccess();
+      }else{
+        console.log("Passar pela verificação");
+        for (var j of turmas) {
+        //console.log(j);
+        this.notificacao.turmas = [j];
+        axios
+          .post(`${baseApiUrl}/notificacoes`, this.notificacao)
+          .then(() => {})
+          .catch(showError);
+        }
+        this.$toasted.global.defaultSuccess();
       }
-      this.$toasted.global.defaultSuccess();
       this.reset();
 
       //console.log(this.notificacao)

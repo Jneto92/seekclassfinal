@@ -18,6 +18,7 @@
     "loadash": "^1.0.0",
     "lodash": "^4.17.21",
     "sort-by": "^1.2.0",
+    "vetur-vls": "^0.3.4",
     "vue": "^2.6.11",
     "vue-gravatar": "^1.4.1",
     "vue-router": "^3.5.1",

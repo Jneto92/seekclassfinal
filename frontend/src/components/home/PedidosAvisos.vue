@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="pedidos-avisos">
     <PageTitle
-      icon="fa fa-commenting"
-      main="Notificações"
-      sub="Todas as notificações"
+      icon="fa fa-envelope"
+      main="Pedidos de avisos"
+      sub="Avisos em espera"
     />
     <b-form>
       <b-row class="my-1">
@@ -31,7 +31,7 @@
     </b-form>
 
     <p v-for="(notificacao, index) in notificacoes" :key="index">
-        <b-card-group deck v-if="notificacoes[index].postar==1">
+        <b-card-group deck v-if="notificacoes[index].postar==0">
           <b-card :title="notificacoes[index].assunto" header-tag="header" footer-tag="footer">
             <template #header>
               <h6 class="mb-0"><b>Remetente: </b>{{ notificacoes[index].Remetente }}</h6>
@@ -51,6 +51,14 @@
                 
               </b-col>
             </b-row><br/>
+            <b-row>
+              <b-col sm="2"><b-button href="#" pill variant="success" 
+                @click="autorizarAviso(notificacoes[index])">Postar</b-button></b-col>
+              <b-col sm="2"><b-button href="#" pill variant="danger" 
+                @click="cancelarAviso(notificacoes[index])">Cancelar</b-button></b-col>
+              <b-col sm="8"></b-col>
+            </b-row>
+            
             <template #footer>
               <em><b>Criado em: </b>{{ notificacoes[index].createdAt }}</em>
             </template>
@@ -60,15 +68,14 @@
     </p>
   </div>
 </template>
+
 <script>
-//import Turmas from "../home/Turmas";
 import {mapState} from 'vuex'
 import axios from "axios";
-import { baseApiUrl /*showError*/ } from "@/global";
+import { baseApiUrl, showError } from "@/global";
 import PageTitle from "../template/PageTitle";
-//import Notificacao from "../home/Notificacao"
 export default {
-  name: "Notificacoes",
+  name: "PedidosAvisos",
   components: {
     PageTitle,
     //Notificacao
@@ -76,6 +83,7 @@ export default {
   data: function () {
     return {
       notificacoes: [],
+      notificacao: {},
       turmas: [],
       fields: [
         { key: "id", label: "Código", sortable: true },
@@ -143,14 +151,42 @@ export default {
           });
       }
     },
+    autorizarAviso(notificacao){
+      this.notificacao.id = notificacao.id;
+      this.notificacao.postar = true;
+      this.notificacao.assunto = notificacao.assunto;
+      this.notificacao.conteudo = notificacao.conteudo;
+      const url = `${baseApiUrl}/notificacoes/${notificacao.id}`;
+      console.log(this.notificacao)
+      axios.put(url, this.notificacao)
+        .then(() => {
+          this.$toasted.global.defaultSuccess();
+          this.loadNotificacoes();
+          this.notificacao = {};
+        })
+        .catch(showError);
+      
+    },
+    cancelarAviso(notificacao){
+      this.notificacao.id = notificacao.id;
+      const url = `${baseApiUrl}/notificacoes/${notificacao.id}`;
+      axios.delete(url)
+        .then(() => {
+          this.$toasted.global.defaultSuccess();
+          this.loadNotificacoes();
+          this.notificacao = {};
+        })
+        .catch(showError);
+    },
   },
   mounted() {
     this.loadNotificacoes();
     this.loadTurmasSel();
   },
-};
+}
 </script>
-<style scoped>
+
+<style>
 .notificacao-content {
   background-color: white;
   border-radius: 8px;

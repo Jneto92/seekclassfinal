@@ -5,10 +5,10 @@
       <!--<Perfil :nome="perfil.usuario.nome" :email="perfil.usuario.email"/>-->
       <b-card no-body>
         <b-tabs pills card vertical>
-          <b-tab title="Configirações do usuário" active
+          <b-tab title="Configurações do usuário" active
             ><b-card-text><Perfil /></b-card-text>
           </b-tab>
-          <b-tab title="Trocar senha"
+          <b-tab title="Alterar senha"
             ><b-card-text><TrocarSenha /></b-card-text></b-tab
           >
           <!--<b-tab title="Tab 3"><b-card-text>Tab contents 3</b-card-text></b-tab>--->

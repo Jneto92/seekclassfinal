@@ -21,6 +21,9 @@ module.exports = app => {//funções para validação de formulários
     function statusFirst(value, msg){
         if(value === 1) throw msg
     }
+    function statusFirstNo(value, msg){
+        if(value === 0) throw msg
+    }
     function passRandom(len){
         var passwd = ''
         do{
@@ -30,6 +33,9 @@ module.exports = app => {//funções para validação de formulários
 
         return passwd
     }
+    function testeSenha(value, msg){
+        if(value.length < 6 ) throw msg//se o valor é pequeno
+    }
 
-    return {existsOrError, notExistsOrError, equalsOrError, statusFirst, passRandom}//retornando todas os métodos para usar em outras classes
+    return {existsOrError, notExistsOrError, equalsOrError, statusFirst, passRandom, statusFirstNo, testeSenha}//retornando todas os métodos para usar em outras classes
 }

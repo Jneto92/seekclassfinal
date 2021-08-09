@@ -1,9 +1,10 @@
 const bcrypt = require('bcrypt-nodejs')
 const nodemailer = require('nodemailer')
+const SMTP_Config = require('../config/smtp')
 
 module.exports = app => {
 
-    const { existsOrError, notExistsOrError, equalsOrError, statusFirst, passRandom } = app.api.validation//importanto métodos para validações dos campos
+    const { existsOrError, notExistsOrError, equalsOrError, statusFirst, passRandom, statusFirstNo, testeSenha } = app.api.validation//importanto métodos para validações dos campos
 
     const encryptPassword = senha => {//método para criptografar senha
         const salt = bcrypt.genSaltSync(10)
@@ -101,8 +102,10 @@ module.exports = app => {
                 existsOrError(user.email, 'E-mail não informado')//verificando se o campo foi preenchido
                 //existsOrError(user.tipoUsuario, 'Tipo do usuário não informado')
                 existsOrError(user.senha, 'Senha não informada')
+                testeSenha(user.senha, 'Digite uma senha com no mínimo 6 digitos!')
                 existsOrError(user.confirmarSenha, 'Confirmação de senha inválida')//verificando se o campo foi preenchido
                 equalsOrError(user.senha, user.confirmarSenha, 'Senhas diferentes')//verificando se o campo senha é igual ao confirmar senha
+                
                 
                 const userFromDb = await app.db('usuarios')//acessando a tabela usuarios e carregando na variavel userFromDb
                     //.select('status')
@@ -149,6 +152,7 @@ module.exports = app => {
             //existsOrError(user.email, 'E-mail não informado')//verificando se o campo foi preenchido
             //existsOrError(user.tipoUsuario, 'Tipo do usuário não informado')
             existsOrError(user.senha, 'Senha não informada')
+            testeSenha(user.senha, 'Digite uma senha com no mínimo 6 digitos!')
             existsOrError(user.confirmarSenha, 'Confirmação de senha inválida')//verificando se o campo foi preenchido
             equalsOrError(user.senha, user.confirmarSenha, 'Senhas diferentes')//verificando se o campo senha é igual ao confirmar senha
             
@@ -189,7 +193,7 @@ module.exports = app => {
                 .where({ email: user.email }).first()//verificando se e-mail existe no banco
 
             existsOrError(userFromDb, 'Usuário não existe')//erro
-            statusFirst(!userFromDb.status, 'Primeiro acesso ainda não definido para o email: '+user.email)//verificando se o email ainda não fez o primeiro acesso
+            statusFirstNo(userFromDb.status, 'Primeiro acesso ainda não definido para o email: '+user.email)//verificando se o email ainda não fez o primeiro acesso
 
             const senhaRandom = passRandom(10)
             console.log(senhaRandom)
@@ -202,27 +206,54 @@ module.exports = app => {
                 .then(_ => res.status(204).send())//sucesso
                 .catch(err => res.status(500).send(err))//erro
 
-
                 const transporter = nodemailer.createTransport({
-                    host: "smtp.gmail.com",
-                    port: 587,
-                    secure: true,
+                    host: SMTP_Config.host,
+                    port: SMTP_Config.port,
+                    secure: false,
                     auth: {
-                        user: "netolima1992@gmail.com",
-                        pass: "netolima10"
-                    }
+                        user: SMTP_Config.user,
+                        pass: SMTP_Config.pass,
+                        //user: "backendseekclass@backendseekclass.com",
+                        //pass: "Seekclass@"
+                    },
+                    tls: {
+                        rejectUnauthorized: false,
+                    },
                 });
-
                 transporter.sendMail({
-                    from: "netolima1992@gmail.com",
-                    to: userFromDb.email,
+                    from: "SeekClass<nike.jn@gmail.com>",
+                    to: "seekclassifb@gmail.com, "+userFromDb.email+"",
                     subject: "Alteração de senha",
-                    text: "Nova senha: "+senhaRandom+" definida."
+                    text: "Nova senha: "+senhaRandom+" definida.",
+                    html: "Nova senha: <b>"+senhaRandom+"</b> definida."
                 }).then(message =>{
                     console.log(message)
                 }).catch(err => {
                     console.log(err)
                 })
+
+                /*const transporter = nodemailer.createTransport({
+                    host: "smtp.mailtrap.io",
+                    port: 2525,
+                    auth: {
+                        user: "f7700e43835928",
+                        pass: "44b5c961449d47"
+                        //user: "backendseekclass@backendseekclass.com",
+                        //pass: "Seekclass@"
+                    }
+                });
+
+                transporter.sendMail({
+                    from: "SeekClass<f7700e43835928>",
+                    to: userFromDb.email,
+                    subject: "Alteração de senha",
+                    text: "Nova senha: "+senhaRandom+" definida.",
+                    html: "Nova senha: <b>"+senhaRandom+"</b> definida."
+                }).then(message =>{
+                    console.log(message)
+                }).catch(err => {
+                    console.log(err)
+                })*/
 
         } catch (msg) {
             return res.status(400).send(msg)//erro

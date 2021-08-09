@@ -60,6 +60,7 @@ const routes = [
     name: 'perfilPages',
     path: '/perfil',
     component: PerfilPages
+    
 },{
     name: 'aviso',
     path: '/avisos',

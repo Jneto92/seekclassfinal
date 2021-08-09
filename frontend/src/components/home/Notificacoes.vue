@@ -43,7 +43,9 @@
                     <p><b>Conteúdo: </b></p>
                     <div class="notificacao-content">
                       <p v-html="notificacoes[index].conteudo"></p>
+                      
                     </div>
+                    Destinada a turma: {{ notificacoes[index].Turma }}
                   </b-card>
                 </b-card-text>
               </b-col>

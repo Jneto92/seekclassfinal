@@ -1,8 +1,6 @@
 // Update with your config settings.
-
 module.exports = {
 
-  
     client: 'mysql2',
     connection: {
       database: 'seekclass',
@@ -16,6 +14,4 @@ module.exports = {
     migrations: {
       tableName: 'knex_migrations'
     }
-  
-
 };

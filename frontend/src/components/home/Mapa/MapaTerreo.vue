@@ -2,12 +2,13 @@
   <div class="mapa-terreo">
       <b-container>
           <b-row>
-              <b-col col="9">
-                <b-card class="mapaandar">
+              <b-col sm="9">
+                <b-container fluid="md">
+                <b-card >
                     <img src="@/assets/terreoifb.png" alt="Mapa" />
 
                     <img id="Cantina" class="estados" alt="Cantina"
-                    @load="posicionar('Cantina', '9%', '57%')"
+                    @load="posicionar('Cantina', '7%', '44%')"
                     @mouseover="algumacoisa(Cantina, Cantina.posicaoL, Cantina.posicaoT, 'Cantina')"
                     @mouseout="limpar('Cantina')"
                     src="@/assets/local1.png"
@@ -25,7 +26,7 @@
                     src="@/assets/local1.png"
                     />
                     <img id="Ginasio" class="estados" alt="Ginásio"
-                    @load="posicionar('Ginasio', '79%', '41%')"
+                    @load="posicionar('Ginasio', '85%', '48%')"
                     @mouseover="algumacoisa(Ginasio, Ginasio.posicaoL, Ginasio.posicaoT, 'Ginasio')"
                     @mouseout="limpar('Ginasio')"
                     src="@/assets/local1.png"
@@ -54,6 +55,7 @@
                         <p> {{ cart.Caminho }}</p>
                     </div>
                 </b-card>
+                </b-container>
               </b-col>
               <b-col sm="3">
                   <b-card 

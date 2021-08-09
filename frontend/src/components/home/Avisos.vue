@@ -74,6 +74,7 @@ export default {
       turmas: [],
       notificacao: {},
       notificacoes: [],
+      encaminhamento: [],
     };
   },
   methods: {
@@ -82,20 +83,37 @@ export default {
     },
     save() {
       var turmas = this.notificacao.turmas;
+      
+      
+
       //this.notificacao.Remetente = this.user.nome
       this.notificacao.remetente = this.user.id
-      console.log(this.user.representante);
+      //console.log(this.user.representante);
+      //console.log(turmas);
       if(this.user.representante == 1 || this.user.tipoUsuario == 1 || this.user.admin == 1){
         console.log("Pode postar sem verificação");
         for (var i of turmas) {
-        //console.log(i);
-        this.notificacao.postar = true;
-        this.notificacao.turmas = [i];
-        axios
-          .post(`${baseApiUrl}/notificacoes`, this.notificacao)
-          .then(() => {})
-          .catch(showError);
+          const url = `${baseApiUrl}/turmas/${i}`;
+          console.log(i)
+          axios.get(url).then((res) => {
+            this.encaminhamento = res.data;
+            //console.log(this.encaminhamento.nome)
+             
+            
+          })
+          
+          
+          this.notificacao.postar = true;
+          this.notificacao.turmas = [i];
+          var enc =+ i
+          
+          axios
+            .post(`${baseApiUrl}/notificacoes`, this.notificacao)
+              .then(() => {})
+              .catch(showError);
         }
+        
+        console.log(enc)
         this.$toasted.global.defaultSuccess();
       }else{
         console.log("Passar pela verificação");

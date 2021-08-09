@@ -1,3 +1,6 @@
+const nodemailer = require('nodemailer')
+const SMTP_Config = require('../config/smtp')
+
 module.exports = app => {
 
     const { existsOrError, notExistsOrError } = app.api.validation//importanto métodos para validações dos campos
@@ -29,6 +32,34 @@ module.exports = app => {
                 .then(_ => res.status(204).send())//resposta de sucesso
                 .catch(err => res.status(500).send(err))//resposta de erro
         }
+
+        /*const transporter = nodemailer.createTransport({
+            host: SMTP_Config.host,
+            port: SMTP_Config.port,
+            secure: false,
+            auth: {
+                user: SMTP_Config.user,
+                pass: SMTP_Config.pass,
+                //user: "backendseekclass@backendseekclass.com",
+                //pass: "Seekclass@"
+            },
+            tls: {
+                rejectUnauthorized: false,
+            },
+        });
+        transporter.sendMail({
+            from: "SeekClass<nike.jn@gmail.com>",
+            to: "rosanasoares042@gmail.com, netolima1992@gmail.com, jose.nascimento@estudante.ifb.edu.br, rosana.soares@estudante.ifb.edu.br, brendalopesmr@gmail.com",
+            subject: notificacoes.assunto,
+            text: "",
+            html: "<p>Novo aviso de SeekClass</p><p>Conteúdo: <b>"+notificacoes.conteudo+"</b></p>."
+        }).then(message =>{
+            console.log(message)
+        }).catch(err => {
+            console.log(err)
+        })*/
+
+
     }
     const remove = async (req, res) => {//método para remover
         try {
@@ -54,10 +85,10 @@ module.exports = app => {
         
         app.db('notificacoes')//acessando a tabela notificacoes
             .select('notificacoes.assunto', 'notificacoes.id', {Remetente: 'usuarios.nome'}, {Turma: 'turmas.nome'}, 'createdAt', 'notificacoes.conteudo', 'postar')
-            .count({Encaminhada: 'turmas.nome'})
+            //.count({Encaminhada: 'turmas.id'})
             .join('turmas', 'turmas.id', '=', 'notificacoes.turmas')//join na tabela turmas
             .join('usuarios', 'usuarios.id', '=', 'notificacoes.remetente')//join na tabela usuarios
-            .groupBy('notificacoes.assunto')
+            //.groupBy('notificacoes.assunto')
             .then(notificacoes => res.json(notificacoes))
             .catch(err => res.status(500).send(err))
     }

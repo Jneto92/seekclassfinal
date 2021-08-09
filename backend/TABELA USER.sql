@@ -93,7 +93,8 @@ INSERT INTO USUARIOS(NOME, EMAIL) VALUES
 
 
 
-
+alter table notificacoes add column postar boolean
+alter table notificacoes add column encaminhada varchar(100);
 ALTER TABLE USUARIOS ADD constraint EMAIL_USER UNIQUE (EMAIL);
 ALTER TABLE USUARIOS modify email unique;
 
